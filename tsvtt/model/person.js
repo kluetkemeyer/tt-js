@@ -30,13 +30,17 @@ tsvtt.model.Person = function(p_data) {
 			birthdate: null,
 			gender: null
 		}, p_data);
+};
+
+tsvtt.model.Person.prototype.saveRequest() {
+	
 }
 
 
 tsvtt.model._PersonExtension = function(p_person, raw_data, p_data) {
 	goog.base(this, raw_data, p_data);
 	this.person_ = p_person;
-}
+};
 tsvtt.model._PersonExtension.prototype.person_;
 
 // inherits from tsvtt.model.AbstractModel

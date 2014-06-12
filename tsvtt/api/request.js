@@ -3,21 +3,22 @@
  */
 
 goog.provide('tsvtt.api.Request');
+goog.provide('tsvtt.api.RequestMethod');
 
-goog.require('tsvtt.utils.base');
+tsvtt.api.RequestMethod = {
+	GET: "GET",
+	POST: "POST",
+	PUT: "PUT",
+	MULTI: "MULTI"
+};
 
-tsvtt.api.Request = function(p_method, p_callback) {
+tsvtt.api.Request = function(p_method) {
 	var undefined;
 	if (p_method != undefined) {
 		this.method_ = p_method;
 	}
-	
-	if (p_callback != undefined) {
-		this.callback_ = p_callback;
-	}
 };
-tsvtt.api.Request.prototype.callback_;
-tsvtt.api.Request.prototype.method_ = tsvtt.utils.nope;
+tsvtt.api.Request.prototype.method_ = tsvtt.api.RequestMethod.GET;
 
 
 /**
