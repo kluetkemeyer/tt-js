@@ -11,8 +11,6 @@ goog.require("ttapp.Config");
  */
 ttapp.api.apistate = {
 	MODULE: "apistate",
-	USERNAME: "username",
-	PASSWORD: "password",
 	SESSIONID: "sessid",
 	SESSIONKEY: "sesskey"
 };
@@ -34,63 +32,62 @@ ttapp.api.APIState = function() {
 };
 
 /**
- * The username of the currently logged in user.
- * This can be a page provided username or the email address used for
- * registration.
- * 
- * @type {?string}
- */
-ttapp.api.APIState.prototype._username = null;
-
-/**
- * The password of the currently logged in user.
- * If the password is not stored, the user should be asked for the
- * password on login process.
- * 
- * @type {?string}
- */
-ttapp.api.APIState.prototype._password = null;
-
-/**
  * The session information of the currently initialized session.
  * 
- * @type {?Object}
+ * @type {?{
+ * 	id: number,
+ *  key: ?string
+ * }}
  */
 ttapp.api.APIState.prototype._session = null;
 
-
+/**
+ * Initializes the session.
+ * 
+ * @private
+ */
 ttapp.api.APIState.prototype.init = function() {
 	var storage = new goog.storage.mechanism.HTML5LocalStorage();
-	if (storage.isAvailable) {
-		this._username = storage.get(ttapp.api.apistate.USERNAME);
-		this._password = storage.get(ttapp.api.apistate.PASSWORD);
-		
+	if (storage.isAvailable) {		
 		if (ttapp.Config.STORE_SESSION) {
 			var id = storage.get(ttapp.api.apistate.SESSIONID);
-			this.setSessionId(id);
-			if (id) {
-				this._session.key = storage.get(ttapp.api.apistate.SESSIONKEY);
-			}
+			var key = storage.get(ttapp.api.apistate.SESSIONKEY);
+			this.setSession(ttapp.stoi(id), key);
 		}
 	}
-	
-	ttapp.debug.log(ttapp.api.apistate.MODULE, 
-			"initialized api state for user", 
-			this._username, (goog.isNull(this._password) 
-			? " without password" : "with password"));
 	ttapp.debug.log(ttapp.api.apistate.MODULE, "session: ", 
 			this._session);
 }
 
 /**
- * @private
+ * @public
+ * @param {?number=} opt_id The id of the session
+ * @param {?string=} opt_key The key for the encoding of the session.
  */
-ttapp.api.APIState.prototype.setSessionId = function(id) {
-	if (!id) {
-		this._session = null;
+ttapp.api.APIState.prototype.setSession = function(opt_id, opt_key) {
+	if (goog.isDefAndNotNull(opt_id)) {
+		this._session = {
+			id: opt_id,
+			key: opt_key || null
+		};		
 	} else {
-		this._session = this._session || {};
-		this._session.id = id;
+		this._session = null;
+	}
+	
+	
+	var storage = new goog.storage.mechanism.HTML5LocalStorage();
+	if (storage.isAvailable) {
+		if (this._session === null) {
+			storage.remove(ttapp.api.apistate.SESSIONID);
+			storage.remove(ttapp.api.apistate.SESSIONKEY);
+		} else {
+			storage.set(ttapp.api.apistate.SESSIONID, "" + this._session.id);
+			if (this._session.key) {
+				storage.set(ttapp.api.apistate.SESSIONKEY, this._session.key);
+			} else {
+				storage.remove(ttapp.api.apistate.SESSIONKEY);
+			}
+		}
 	}
 };
 
@@ -100,21 +97,6 @@ ttapp.api.APIState.prototype.setSessionId = function(id) {
  */
 ttapp.api.APIState.prototype.getSession = function() {
 	return this._session;
-}
-
-/**
- * @return {string}
- * @public
- */
-ttapp.api.APIState.prototype.generateSession = function() {
-	var key = "ASDFADSF";
-	
-	this._session = {
-		id: null,
-		key: key
-	};
-	
-	return key;
 }
 
 /**

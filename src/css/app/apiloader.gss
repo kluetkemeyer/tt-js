@@ -1,0 +1,32 @@
+.apiloader-wrapper {
+	position: absolute;
+	z-index: 998;
+	left: 50%;
+	width: 0;
+	top: 50%;
+	height: 0;
+	display: block;
+	opacity: 1;
+	
+	@mixin transition(opacity, 200ms, ease);
+}
+
+.apiloader-wrapper.apiloader-wrapper-hidden, .apiloader-wrapper-hidden {
+	opacity: 0;
+}
+
+.apiloader-wrapper-detached {
+	display: none;
+}
+
+.apiloader {
+	position: relative;
+	left: -100px;
+	top: -62px;
+	
+	border: solid COLOR_APILOADER_BORDER SIZE_APILOADER_BORDERWIDTH;
+	background-color: COLOR_APILOADER_BG;
+	
+	@mixin size(SIZE_APILOADER_WIDTH, SIZE_APILOADER_HEIGHT);
+	@mixin borderradius(SIZE_APILOADER_BORDERRADIUS);
+}

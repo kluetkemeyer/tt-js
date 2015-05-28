@@ -1,0 +1,17 @@
+@defmixin size(WIDTH, HEIGHT) {
+	width: WIDTH;
+	height: HEIGHT;
+}
+
+@defmixin borderradius(RAD) {
+	-moz-border-radius: RAD;
+	-webkit-border-radius: RAD;
+	border-radius: RAD;
+}
+
+@defmixin transition(PROPERTY, TIME, METHOD) {
+	-webkit-transition: PROPERTY TIME METHOD;
+	-moz-transition: PROPERTY TIME METHOD;
+	-o-transition: PROPERTY TIME METHOD;
+	transition: PROPERTY TIME METHOD;
+}

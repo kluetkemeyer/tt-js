@@ -1,0 +1,4 @@
+.ui-imprint-person h6 {
+	font-size: 100%;
+	margin: 1em 0 0.2em 0;
+}

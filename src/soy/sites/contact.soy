@@ -1,0 +1,117 @@
+{namespace ttapp.gui.tpl.sites.contact}
+
+goog.require('ttapp.gui.tpl.pages');
+goog.require('ttapp.gui.tpl.forms');
+
+/**
+ * 
+ */
+{template .contactform autoescape="strict" kind="html"}
+	{call ttapp.gui.tpl.pages.headline}
+		{param title kind="text"}Kontaktformular{/param}
+	{/call}
+	{call ttapp.gui.tpl.forms.wrapWithForm}
+		{param content kind="html"}
+			{call ttapp.gui.tpl.forms.wrapWithSection}
+				{param content kind="html"}
+					{call ttapp.gui.tpl.forms.wrapWithControlGroup}
+						{param content kind="html"}
+							{call ttapp.gui.tpl.forms.label}
+								{param label kind="text"}Ihr Name{/param}
+								{param id kind="text"}name{/param}
+							{/call}
+							{call ttapp.gui.tpl.forms.text}
+								{param id kind="text"}name{/param}
+								{param placeholder kind="text"}Vorname Nachname{/param}
+							{/call}
+						{/param}
+					{/call}
+					{call ttapp.gui.tpl.forms.wrapWithControlGroup}
+						{param content kind="html"}
+							{call ttapp.gui.tpl.forms.label}
+								{param label kind="text"}Ihre E-Mail Adresse{/param}
+								{param id kind="text"}mail{/param}
+							{/call}
+							{call ttapp.gui.tpl.forms.text}
+								{param id kind="text"}mail{/param}
+								{param placeholder kind="text"}abc@xyz.de{/param}
+							{/call}
+						{/param}
+					{/call}
+					{call ttapp.gui.tpl.forms.wrapWithControlGroup}
+						{param content kind="html"}
+							{call ttapp.gui.tpl.forms.label}
+								{param label kind="text"}Betreff{/param}
+								{param id kind="text"}subject{/param}
+							{/call}
+							{call ttapp.gui.tpl.forms.text}
+								{param id kind="text"}subject{/param}
+								{param placeholder kind="text"}Betreff{/param}
+							{/call}
+						{/param}
+					{/call}
+					{call ttapp.gui.tpl.forms.wrapWithControlGroup}
+						{param content kind="html"}
+							{call ttapp.gui.tpl.forms.label}
+								{param label kind="text"}Nachricht{/param}
+								{param id kind="text"}message{/param}
+							{/call}
+							{call ttapp.gui.tpl.forms.textarea}
+								{param id kind="text"}message{/param}
+								{param placeholder kind="text"}Ihre Nachricht{/param}
+							{/call}
+						{/param}
+					{/call}
+					
+					{call ttapp.gui.tpl.forms.wrapWithControls}
+						{param content kind="html"}
+							{call ttapp.gui.tpl.forms.button}
+								{param label kind="text"}Nachricht senden{/param}
+								{param id kind="text"}sendMsg{/param}
+							{/call}
+						{/param}
+					{/call}								
+				{/param}
+			{/call}
+		{/param}
+	{/call}
+{/template}
+
+/**
+ *
+ */
+{template .imprintpage autoescape="strict" kind="html"}
+	{call ttapp.gui.tpl.pages.headline}
+		{param title kind="text"}Impressum{/param}
+	{/call}
+{/template}
+
+/**
+ * @param title
+ * @param text
+ */
+{template .disclaimerSection autoescape="strict" kind="html"}
+	<section class="{css ui-imprint-disclaimer}">
+		<h4>{$title}</h4>
+		<p>{$text}</p>
+	</section>
+{/template}
+
+/**
+ * @param label
+ * @param persons
+ */
+{template .imprintrole autoescape="strict" kind="html"}
+	<section class="{css ui-imprint-role}">
+		<h4>{$label}</h4>
+		{foreach $person in $persons}
+			<section class="{css ui-imprint-person}">
+				<h6>{$person.name}</h6>
+				{if $person.mail}
+					<a href="mailto:{$person.mail}">{$person.mail}</a>
+				{/if}
+			</section>
+		{/foreach}
+	</section>
+{/template}
+

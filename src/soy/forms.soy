@@ -1,0 +1,102 @@
+{namespace ttapp.gui.tpl.forms}
+
+
+/**
+ * Creates a new button.
+ *
+ * @param label The label of the button.
+ * @param? id The id of the button.
+ */
+{template .button autoescape="strict" kind="html"}
+	<button {if $id}id="{$id}" {/if}class="{css pure-button}">{$label}</button>
+{/template}
+
+/**
+ * Creates a new single line text input
+ *
+ * @param id The id of the label
+ * @param? value The initial value of the input
+ * @param? placeholder The placeholder for this input
+ */
+{template .text autoescape="strict" kind="html"}
+	<input type="text" id="{$id}" {if $placeholder}placeholder="{$placeholder}" {/if}{if $value}value="{$value}" {/if} />
+{/template}
+
+/**
+ * Creates a new multi-line text input
+ *
+ * @param id The id of the label
+ * @param? value The initial value of the input
+ * @param? placeholder The placeholder for this input
+ */
+{template .textarea autoescape="strict" kind="html"}
+	<textarea id="{$id}" {if $placeholder}placeholder="{$placeholder}" {/if}>{if $value}{$value}{/if}</textarea>
+{/template}
+
+/**
+ * @param content
+ */
+{template .wrapWithForm autoescape="strict" kind="html"}
+	<form class="{css pure-form} {css pure-form-aligned}">
+		{$content}
+	</form>
+{/template}
+
+/**
+ * @param content
+ */
+{template .wrapWithSection autoescape="strict" kind="html"}
+	<fieldset>
+		{$content}
+	</fieldset>
+{/template}
+
+/**
+ * @param content
+ */
+{template .wrapWithControlGroup autoescape="strict" kind="html"}
+	<div class="{css pure-control-group}">
+		{$content}
+	</div>
+{/template}
+
+/**
+ * @param content
+ */
+{template .wrapWithControls autoescape="strict" kind="html"}
+	<div class="{css pure-controls}">
+		{$content}
+	</div>
+{/template}
+
+/**
+ * @param label
+ * @param? id
+ */
+{template .label autoescape="strict" kind="html"}
+	<label{if $id} for="{$id}"{/if}>{$label}</label>
+{/template}
+
+/**
+ *
+ * @param sections
+ */
+{template .form}
+	<form class="{css pure-form} {css pure-form-aligned}">
+		{foreach $section in $sections}
+			{call .formSection data="$section" /}
+		{/foreach}
+	</form>
+{/template}
+
+
+/**
+ *
+ * @private
+ */
+{template .formSection}
+	<fieldset>
+	
+	</fieldset>
+{/template}
+

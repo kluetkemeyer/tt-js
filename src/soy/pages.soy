@@ -1,0 +1,50 @@
+{namespace ttapp.gui.tpl.pages}
+
+goog.require('ttapp.gui.tpl.menu');
+
+/**
+ * @param title
+ */
+{template .headline autoescape="strict" kind="html"}
+	<h1 class="{css ui-title}">{$title}</h1>
+{/template}
+
+/**
+ *
+ */
+{template .pageContainer}
+	<div class="{css ui-fullscreen}">
+		<div class="{css ui-mainframe}">
+			<a class="{css ui-sidebar-link}"><span></span></a>
+			<div class="{css ui-sidebar}">
+				<nav class="{css pure-menu} {css sideMenu}">
+					<ul class="{css pure-menu-list}">
+					</ul>
+				</nav>
+			</div>
+			
+			<div class="{css ui-contentframe}">
+				<header>
+					{call ttapp.gui.tpl.menu.headMenu /}
+				</header>
+			
+			</div>
+		</div>
+	</div>
+{/template}
+
+
+/**
+ * @param title
+ * @param page
+ */
+{template .contentPage}
+	<div class="{css ui-page}">
+		<header>
+			<h1>{$title}</h1>
+		</header>
+		<section class="{css ui-pagebody}">
+			{$page}
+		</section>
+	</div>
+{/template}

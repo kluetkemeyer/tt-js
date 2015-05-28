@@ -1,0 +1,40 @@
+body {
+  background-color: COLOR_STYLE_BACKGROUND;
+  color: COLOR_STYLE_FONT;
+  font-family: Helvetica;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+
+.transition-fade {
+	-webkit-transition:opacity 500ms ease-out;
+	-moz-transition:opacity 500ms ease-out;
+	-o-transition:opacity 500ms ease-out;
+	transition:opacity 500ms ease-out;
+}
+
+
+
+
+.transparent {
+	opacity: 0;
+}
+
+.hidden-left {
+	width: 0px !important;
+	overflow: hidden;
+}
+
+.ui-fullscreen {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+.ui-contentframe > div {
+	margin: 5px 10px;
+}

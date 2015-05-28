@@ -9,17 +9,31 @@ goog.provide('ttapp.api.encryption');
 goog.require('ttapp.Config');
 
 /**
- * @const {number}
+ * @enum {number}
  * @private
  */
 ttapp.api.encryption.Codes = {
-	PLAIN: 0
+	PLAIN: 1
 };
 
 /**
+ * @typedef {function(!string): !string}
+ */
+ttapp.api.encryption.CryptFunction;
+
+/**
+ * @typedef {{
+ * 		method:	!number,
+ *  	encrypt: !ttapp.api.encryption.CryptFunction,
+ * 		decrypt: !ttapp.api.encryption.CryptFunction
+ * }}
+ */
+ttapp.api.encryption.Encryption;
+
+/**
  * @private
- * @param {string} data
- * @return {string} data
+ * @param {!string} data
+ * @return {!string} data
  */
 ttapp.api.encryption.plainCrypt = function(data) {
 	return data;
@@ -27,10 +41,10 @@ ttapp.api.encryption.plainCrypt = function(data) {
 
 /**
  * @public
- * @type {Object}
+ * @const {ttapp.api.encryption.Encryption}
  */
 ttapp.api.encryption.Plain = {
-	id: ttapp.api.encryption.Codes.PLAIN,
+	method: ttapp.api.encryption.Codes.PLAIN,
 	encrypt: ttapp.api.encryption.plainCrypt,
 	decrypt: ttapp.api.encryption.plainCrypt
 };

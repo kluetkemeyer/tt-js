@@ -1,0 +1,38 @@
+{namespace ttapp.gui.tpl.menu}
+
+
+/**
+ * Creates a head menu.
+ *
+ */
+{template .headMenu}
+	<menu class="{css headMenu-wrapper}">
+		<div class="{css pure-menu} {css headMenu} {css headMenu-top}">
+			<a href="#" class="{css pure-menu-heading} {css headMenu-brand}">TSV Uetersen TT</a>
+			<a href="#" class="{css headMenu-toggle}"><s class="{css bar}"></s><s class="{css bar}"></s></a>
+		</div>
+		<div class="{css pure-menu} {css pure-menu-horizontal} {css pure-menu-scrollable} {css headMenu} {css headMenu-bottom} {css headMenu-tucked}">
+			<div class="{css headMenu-screen}"></div>
+			<ul class="{css pure-menu-list}">
+			</ul>
+		</div>
+	</menu>
+{/template}
+
+/**
+ * Creates a new link for the head menu.
+ *
+ * @param label
+ */
+{template .headMenuLink}
+	<li class="{css pure-menu-item}"><a href="#" class="{css pure-menu-link}">{print $label|escapeHtml}</a></li>
+{/template}
+
+/**
+ * Creates a new link for the head menu.
+ *
+ * @param label
+ */
+{template .categoryLink}
+	<li class="{css pure-menu-item}"><h4 class="{css pure-menu-link}">{print $label|escapeHtml}</h4></li>
+{/template}
